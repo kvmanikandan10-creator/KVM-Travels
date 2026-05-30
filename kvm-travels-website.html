@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KVM Travels - Book vehicles and accommodations in Kerala and Tamil Nadu via WhatsApp">
+    <meta name="keywords" content="travel booking, Kerala, Tamil Nadu, vehicle rental, accommodation">
+    <title>KVM Travels - South India Travel Booking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #d4a574;
+            --primary-teal: #1b8a8a;
+            --primary-dark: #2d3a3a;
+            --cream: #faf8f3;
+            --accent-warm: #d97634;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --border-light: #e0dbd3;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            color: var(--text-dark);
+            background: var(--cream);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .whatsapp-btn {
+            background: #25d366;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .whatsapp-btn:hover {
+            background: #1da851;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+
+        .phone-text {
+            font-size: 13px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--cream) 0%, rgba(212, 165, 116, 0.1) 100%);
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--primary-teal);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: #157070;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(27, 138, 138, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-teal);
+            border: 2px solid var(--primary-teal);
+            padding: 14px 30px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-teal);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* SERVICES SECTION */
+        .services {
+            padding: 100px 20px;
+            background: white;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--text-dark);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .service-card {
+            background: var(--cream);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .service-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .service-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+        }
+
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .service-features li {
+            padding: 8px 0;
+            color: var(--text-light);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .service-features li:before {
+            content: "✓";
+            color: var(--primary-teal);
+            font-weight: bold;
+        }
+
+        .service-card .whatsapp-btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* DESTINATIONS SECTION */
+        .destinations {
+            padding: 100px 20px;
+            background: var(--cream);
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 50px;
+        }
+
+        .destination-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            aspect-ratio: 3/4;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .destination-card:nth-child(1) { animation-delay: 0.1s; }
+        .destination-card:nth-child(2) { animation-delay: 0.2s; }
+        .destination-card:nth-child(3) { animation-delay: 0.3s; }
+        .destination-card:nth-child(4) { animation-delay: 0.4s; }
+        .destination-card:nth-child(5) { animation-delay: 0.5s; }
+        .destination-card:nth-child(6) { animation-delay: 0.6s; }
+        .destination-card:nth-child(7) { animation-delay: 0.7s; }
+
+        .destination-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .destination-card:hover .destination-img {
+            transform: scale(1.08);
+        }
+
+        .destination-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .destination-card:hover .destination-overlay {
+            opacity: 1;
+        }
+
+        .destination-name {
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* HOW IT WORKS */
+        .how-it-works {
+            padding: 100px 20px;
+            background: white;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .step {
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .step:nth-child(1) { animation-delay: 0.2s; }
+        .step:nth-child(2) { animation-delay: 0.4s; }
+        .step:nth-child(3) { animation-delay: 0.6s; }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            margin: 0 auto 20px;
+        }
+
+        .step h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .step p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        /* CTA SECTION */
+        .cta-section {
+            padding: 80px 20px;
+            background: var(--primary-teal);
+            color: white;
+            text-align: center;
+            border-radius: 12px;
+            margin: 80px 20px;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 32px;
+            opacity: 0.95;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary-teal);
+            border: none;
+            padding: 14px 32px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-white:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--primary-dark);
+            color: #ccc;
+            padding: 60px 20px 30px;
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+
+        .footer-section p {
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .footer-section a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-gold);
+        }
+
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .footer-contact a {
+            color: #aaa;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* SCROLL ANIMATION */
+        .scroll-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .header-actions {
+                gap: 12px;
+            }
+
+            .phone-text {
+                display: none;
+            }
+
+            .destinations-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-cta-group {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 60px 16px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .services {
+                padding: 60px 16px;
+            }
+
+            .destinations {
+                padding: 60px 16px;
+            }
+
+            .destinations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 24px;
+                margin-bottom: 40px;
+            }
+
+            .cta-section {
+                margin: 40px 0;
+                padding: 50px 16px;
+            }
+
+            .cta-section h2 {
+                font-size: 26px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="header-content">
+        <div class="logo">KVM Travels</div>
+        <div class="header-actions">
+            <span class="phone-text">☎ 8300969101</span>
+            <a href="https://wa.me/918300969101?text=Hi%20KVM%20Travels%2C%20I%20need%20travel%20assistance" target="_blank" class="whatsapp-btn">
+                <span>💬</span> WhatsApp
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Discover South India's Hidden Gems</h1>
+        <p class="hero-subtitle">Book your vehicle & accommodation effortlessly via WhatsApp</p>
+        <div class="hero-cta-group">
+            <a href="https://wa.me/918300969101?text=I%20want%20to%20book%20a%20vehicle" target="_blank" class="btn-primary">
+                <span>🚗</span> Book Vehicle
+            </a>
+            <a href="https://wa.me/918300969101?text=I%20want%20to%20book%20accommodation" target="_blank" class="btn-primary" style="background: var(--accent-warm);">
+                <span>🏨</span> Book Room
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES SECTION -->
+<section class="services">
+    <div class="container">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🚗</div>
+                <h3>Vehicle Booking</h3>
+                <p>Book reliable vehicles for your South India adventure—cars, cabs, and coaches for all group sizes.</p>
+                <ul class="service-features">
+                    <li>Professional drivers</li>
+                    <li>Well-maintained vehicles</li>
+                    <li>Flexible rental periods</li>
+                    <li>Affordable rates</li>
+                </ul>
+                <a href="https://wa.me/918300969101?text=I%20need%20a%20vehicle%20for%20my%20trip" target="_blank" class="whatsapp-btn">Chat on WhatsApp</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🏨</div>
+                <h3>Room Booking</h3>
+                <p>Curated accommodations from budget to luxury in Kerala and Tamil Nadu's best destinations.</p>
+                <ul class="service-features">
+                    <li>Best locations</li>
+                    <li>Verified stays</li>
+                    <li>Competitive pricing</li>
+                    <li>Group bookings</li>
+                </ul>
+                <a href="https://wa.me/918300969101?text=I%20need%20accommodation%20for%20my%20group" target="_blank" class="whatsapp-btn">Chat on WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DESTINATIONS SECTION -->
+<section class="destinations">
+    <div class="container">
+        <h2 class="section-title">Popular Destinations</h2>
+        <div class="destinations-grid">
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=600&fit=crop" alt="Munnar Hills" class="destination-img">
+                <div class="destination-overlay">
+                    <div class="destination-name">Munnar Hills, Kerala</div>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=600&fit=crop" alt="Kochi Backwaters" class="destination-img">
+                <div class="destination-overlay">
+                    <div class="destination-name">Kochi Backwaters</div>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1518455041526-6f896fc00f0b?w=400&h=600&fit=crop" alt="Alleppey Beach" class="destination-img">
+                <div class="destination-overlay">
+                    <div class="destination-name">Alleppey Beach</div>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1597377388953-0f81a6cc3dd0?w=400&h=600&fit=crop" alt="Ooty Hill Station" class="destination-img">
+                <div class="destination-overlay">
+                    <div class="destination-name">Ooty Hill Station</div>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1610395588154-5efab6b4b0b8?w=400&h=600&fit=crop" alt="Madurai Temple" class="destination-img">
+                <div class="destination-overlay">
+                    <div class="destination-name">Madurai Temple</div>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1516390270949-6e6b2f0a8680?w=400&h=600&fit=crop" alt="Thekkady Wildlife" class="destination-img">
+                <div class="destination-overlay">
+                    <div class="destination-name">Thekkady Wildlife</div>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1559827287-6ba09b28e52e?w=400&h=600&fit=crop" alt="Varkala Cliff" class="destination-img">
+                <div class="destination-overlay">
+                    <div class="destination-name">Varkala Cliffs</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works">
+    <div class="container">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps-grid">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Message on WhatsApp</h3>
+                <p>Send us a message with your travel dates, destination preferences, and group size on WhatsApp.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Get Custom Quote</h3>
+                <p>Our team provides personalized quotes for vehicles and accommodations tailored to your budget.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Confirm & Enjoy</h3>
+                <p>Confirm your booking and get ready for an unforgettable South India adventure with us.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Ready to Explore South India?</h2>
+        <p>Contact us on WhatsApp and start planning your dream trip today!</p>
+        <a href="https://wa.me/918300969101?text=Hi%20KVM%20Travels%2C%20I%20want%20to%20book%20my%20South%20India%20trip" target="_blank" class="btn-white">
+            <span>💬</span> Start Your Journey
+        </a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>About KVM Travels</h4>
+            <p>Your trusted partner for seamless travel experiences across Kerala and Tamil Nadu. We specialize in personalized vehicle and accommodation bookings.</p>
+        </div>
+
+        <div class="footer-section">
+            <h4>Services</h4>
+            <ul>
+                <li><a href="#services">Vehicle Booking</a></li>
+                <li><a href="#services">Room Reservations</a></li>
+                <li><a href="#">Group Tours</a></li>
+                <li><a href="#">Custom Itineraries</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Destinations</h4>
+            <ul>
+                <li><a href="#destinations">Kerala</a></li>
+                <li><a href="#destinations">Tamil Nadu</a></li>
+                <li><a href="#destinations">Munnar</a></li>
+                <li><a href="#destinations">Madurai</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Contact Us</h4>
+            <div class="footer-contact">
+                <a href="https://wa.me/918300969101" target="_blank">
+                    <strong>WhatsApp:</strong> +91 8300969101
+                </a>
+                <a href="tel:+918300969101">
+                    <strong>Phone:</strong> +91 8300969101
+                </a>
+                <p style="margin-top: 12px; font-size: 13px; color: #999;">Available 7 days a week, 9 AM - 9 PM</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2024 KVM Travels. All rights reserved. | Your South India Travel Specialists</p>
+    </div>
+</footer>
+
+<script>
+    // Scroll animation for elements
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    // Observe all cards and steps for scroll animations
+    document.querySelectorAll('.service-card, .destination-card, .step').forEach(el => {
+        el.classList.add('scroll-in');
+        observer.observe(el);
+    });
+
+    // Smooth parallax effect on scroll
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            hero.style.backgroundPosition = `0 ${scrolled * 0.5}px`;
+        }
+    });
+</script>
+
+</body>
+</html>
